@@ -1,3 +1,5 @@
+@props(['active' => false])
+
 <a 
     {{ $attributes }}
     aria-current="{{ $active ? 'page' : false }}"
