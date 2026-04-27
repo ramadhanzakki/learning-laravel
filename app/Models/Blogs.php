@@ -24,8 +24,14 @@ class Blogs {
     }
 
     public static function find($id){
-        return Arr::first(static::all(), function($blog) use ($id){
+        $blog = Arr::first(static::all(), function($blog) use ($id){
             return $blog['id'] == $id;
         });
+
+        if (! $blog) {
+            abort(404);
         }
+
+        return $blog;
+    }
 }
