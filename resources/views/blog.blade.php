@@ -4,7 +4,7 @@
     @foreach ($blogs as $blog)
 
     <article class="max-w-3xl mb-10 pb-8 border-b border-slate-700/50">
-        <a href="/detail-blog/{{ $blog['id'] }}">
+        <a href="/detail-blog/{{ $blog['slug'] }}">
             <h2 class="text-2xl font-bold text-gray-100 mb-2 hover:text-indigo-400 transition-colors duration-200 cursor-pointer">
                 {{ $blog['blogTitle'] }}
             </h2>
@@ -17,7 +17,7 @@
         <p class="text-slate-300 leading-relaxed mb-5">
             {{ Str::limit($blog['body'], 150, '...') }}
         </p>
-        <a href="/detail-blog/{{ $blog['id'] }}" class="inline-flex items-center text-sm font-semibold text-indigo-400 hover:text-indigo-300 transition-colors duration-200 group">
+        <a href="/detail-blog/{{ $blog['slug'] }}" class="inline-flex items-center text-sm font-semibold text-indigo-400 hover:text-indigo-300 transition-colors duration-200 group">
             Read More 
             <span class="ml-1 transition-transform duration-200 group-hover:translate-x-1">&raquo;</span>
         </a>
