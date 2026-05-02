@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Arr;
 
-class Blog extends Model{
-    protected $table = 'blog_posts';
+class Blog extends Model
+{
+    protected $table = 'blogs';
     protected $fillable = ['blogTitle', 'author', 'slug', 'body'];
 }
