@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Blogs;
-use Illuminate\Support\Arr;
+use App\Models\Blog;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -13,15 +13,17 @@ Route::get('/about', function () {
 });
 
 Route::get('/blog', function () {
-    return view('blog', ['title' => 'Blog', 'blogs' => Blogs::all()]);
+    return view('blog', ['title' => 'Blog', 'blogs' => Blog::all()]);
 });
 
-Route::get('/detail-blog/{id}', function($id) {
-
-    $blog = Blogs::find($id);
-
+Route::get('/detail-blog/{blog:slug}', function(Blog $blog) {
     return view('detail-blog', ['title' => 'Blog Detail', 'blog' => $blog]);
 });
+
+Route::get('/author/{user}', function(User $user) {
+    return view('blog', ['title' => 'Articles by ' . $user->name, 'blogs' => $user->blogs]);
+});
+
 
 Route::get('/contact', function () {
     return view('contact', ['title' => 'Contact']);

@@ -1,23 +1,23 @@
 <x-layout>
     <x-slot:title>{{ $title }}</x-slot>
-
+    
     @foreach ($blogs as $blog)
 
     <article class="max-w-3xl mb-10 pb-8 border-b border-slate-700/50">
-        <a href="/detail-blog/{{ $blog['id'] }}">
+        <a href="/detail-blog/{{ $blog['slug'] }}">
             <h2 class="text-2xl font-bold text-gray-100 mb-2 hover:text-indigo-400 transition-colors duration-200 cursor-pointer">
                 {{ $blog['blogTitle'] }}
             </h2>
         </a>
         <div class="text-sm text-slate-400 mb-4">
-            <a href="#" class="font-medium text-slate-300 hover:text-indigo-400 transition-colors duration-200">{{ $blog['author'] }}</a> 
+            <a href="/author/{{ $blog->author->id }}" class="font-medium text-slate-300 hover:text-indigo-400 transition-colors duration-200">{{ $blog->author->name }}</a> 
             <span class="mx-1">|</span> 
-            <time datetime="2026-04-26">26 April 2026</time>
+            <time datetime="2026-04-26">{{ $blog['created_at']->diffForHumans() }}</time>
         </div>
         <p class="text-slate-300 leading-relaxed mb-5">
             {{ Str::limit($blog['body'], 150, '...') }}
         </p>
-        <a href="/detail-blog/{{ $blog['id'] }}" class="inline-flex items-center text-sm font-semibold text-indigo-400 hover:text-indigo-300 transition-colors duration-200 group">
+        <a href="/detail-blog/{{ $blog['slug'] }}" class="inline-flex items-center text-sm font-semibold text-indigo-400 hover:text-indigo-300 transition-colors duration-200 group">
             Read More 
             <span class="ml-1 transition-transform duration-200 group-hover:translate-x-1">&raquo;</span>
         </a>
