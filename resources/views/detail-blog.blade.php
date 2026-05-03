@@ -6,9 +6,12 @@
             {{ $blog['blogTitle'] }}
         </h2>
         <div class="text-sm text-slate-400 mb-4">
-            <a href="/author/{{ $blog->author->id }}" class="font-medium text-slate-300 hover:text-indigo-400 transition-colors duration-200">{{ $blog->author->name }}</a> 
-            <span class="mx-1">|</span> 
-            <time datetime="2026-04-26">26 April 2026</time>
+            By
+            <a href="/author/{{ $blog->author->username }}" class="font-medium text-slate-300 hover:text-indigo-400 transition-colors duration-200">{{ $blog->author->name }}</a> 
+             In 
+            <a href="/category/{{ $blog->category->slug }}" class="font-medium text-slate-300 hover:text-indigo-400 transition-colors duration-200">{{ $blog->category->name_category }}</a> 
+            <span class="mx-1">|</span>
+            <time datetime="2026-04-26">{{ $blog['created_at']->diffForHumans() }}</time>
         </div>
         <p class="text-slate-300 leading-relaxed mb-5">
             {{ $blog['body'] }}
