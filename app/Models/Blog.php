@@ -11,9 +11,13 @@ class Blog extends Model
     use HasFactory;
 
     protected $table = 'blogs';
-    protected $fillable = ['blogTitle', 'author', 'slug', 'body'];
+    protected $fillable = ['blogTitle', 'author_id', 'category_id', 'slug', 'body'];
 
     public function author(): BelongsTo{
         return $this->belongsTo(User::class);
+    }
+
+    public function category(): BelongsTo{
+        return $this->belongsTo(Category::class);
     }
 }
