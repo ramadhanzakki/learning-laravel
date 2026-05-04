@@ -14,19 +14,25 @@ Route::get('/about', function () {
 });
 
 Route::get('/blog', function () {
-    return view('blog', ['title' => 'Blog', 'blogs' => Blog::all()]);
+    return view('blog', ['title' => 'Blog', 'blogs' => Blog::filter(request(['search']))->latest()->get()]);
 });
 
 Route::get('/detail-blog/{blog:slug}', function(Blog $blog) {
     return view('detail-blog', ['title' => 'Blog Detail', 'blog' => $blog]);
 });
 
-Route::get('/author/{user}', function(User $user) {
-    return view('blog', ['title' => count($user->blogs) . ' Articles by ' . $user->name, 'blogs' => $user->blogs]);
+Route::get('/author/{user:username}', function(User $user) {
+    $blogs = $user->blogs->load('category', 'author');
+    return view('blog', ['title' => count($blogs) . ' Articles by ' . $user->name, 'blogs' => $blogs]);
 });
 
 Route::get('/category/{category:slug}', function(Category $category) {
-    return view('blog', ['title' => count($category->blogsWithCategory) . ' Articles with ' . $category->name_category, 'blogs' => $category->blogsWithCategory]);
+    $blogs = $category->blogsWithCategory->load('category', 'author');
+
+    return view('blog', [
+        'title' => count($blogs) . ' Articles with ' . $category->name_category,
+        'blogs' => $blogs
+    ]);
 });
 
 Route::get('/contact', function () {
